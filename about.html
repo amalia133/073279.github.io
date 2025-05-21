@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ABOUT PAGE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Amalia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>ABOUT ME</h1>
-        <p>Hi, I'm Amalia and I'm student Unisza</p>
-        <a href="./index.html"><h2>Click here to return to main page!</h2></a>
-    </div>
-</body>    
+<body class="bg-pink-50 text-gray-800">
+  <nav class="bg-pink-700 text-white p-4 flex flex-col md:flex-row justify-center md:justify-around gap-2 md:gap-0">
+    <a href="index.html" class="hover:underline">🏠 Home</a>
+    <a href="about.html" class="hover:underline">👩‍💻 About Me</a>
+    <a href="weather.html" class="hover:underline">🌦️ Weather Dashboard</a>
+    <a href="health.html" class="hover:underline">🩺 Health Dashboard</a>
+  </nav>
+  <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 mt-10 text-center">
+    <h1 class="text-4xl font-bold text-pink-700 mb-4">👩‍💻 About Me</h1>
+    <p class="text-lg mb-4">Hi, I’m <strong>Amalia</strong>, a Computer Science student at <strong>UniSZA</strong>. This site demonstrates my skills in API integration, responsive design, and CI/CD deployment via GitHub Pages.</p>
+    <p class="text-sm text-gray-500 mb-6">Tools: HTML, Tailwind CSS, JavaScript, Chart.js, REST APIs, GitHub</p>
+    <a href="index.html" class="inline-block mt-6 text-pink-600 font-semibold hover:underline">← Back to Home</a>
+  </div>
+</body>
 </html>
