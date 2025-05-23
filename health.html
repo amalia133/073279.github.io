@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #eec9d2;
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-sans">
+
+  <div class="text-center py-10">
+    <h1 class="text-4xl font-bold text-pink-800">Health Dashboard</h1>
+    <p class="text-lg mt-2">Global and Country-Specific COVID-19 Stats</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <input
+      id="countryInput"
+      type="text"
+      placeholder="Type a country..."
+      class="w-full p-3 border border-gray-300 rounded-md mb-4"
+    />
+    <button
+      onclick="fetchData()"
+      class="bg-pink-700 hover:bg-pink-800 text-white font-bold py-2 px-4 rounded"
+    >
+      Get Data
+    </button>
+
+    <div class="mt-6">
+      <canvas id="covidChart"></canvas>
+    </div>
+  </div>
+
+  <footer class="text-center mt-10 text-sm text-gray-700">
+    © 2025 My Personal Dashboard
+  </footer>
+
+  <script>
+    async function fetchData() {
+      const country = document.getElementById('countryInput').value.trim();
+      const chartCanvas = document.getElementById('covidChart');
+
+      try {
+        const response = await fetch(`https://disease.sh/v3/covid-19/countries/${country}`);
+        if (!response.ok) {
+          throw new Error("Country not found!");
+        }
+        const data = await response.json();
+
+        const chartData = {
+          labels: ["Cases", "Deaths", "Recovered", "Active"],
+          datasets: [{
+            label: `${data.country} COVID-19 Stats`,
+            backgroundColor: ['#f87171', '#fbbf24', '#34d399', '#60a5fa'],
+            data: [data.cases, data.deaths, data.recovered, data.active]
+          }]
+        };
+
+        if (window.myChart) {
+          window.myChart.destroy();
+        }
+
+        window.myChart = new Chart(chartCanvas, {
+          type: 'bar',
+          data: chartData,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: `COVID-19 Stats for ${data.country}`
+              }
+            }
+          }
+        });
+
+      } catch (error) {
+        alert("Country not found!");
+        if (window.myChart) {
+          window.myChart.destroy();
+        }
+      }
+    }
+  </script>
+</body>
+</html>
